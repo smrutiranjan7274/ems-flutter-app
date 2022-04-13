@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1069632493239-0fqcrmbiu8mkipj5n2a7342lovnqsk0m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ems.eventhub",
+            "certificate_hash": "851ec7ddfdaaed4bbdee7c233a28f25297c39c1f"
+          }
+        },
+        {
           "client_id": "1069632493239-dua9ln0oij1onlcfrk5sjr00t0bpa3af.apps.googleusercontent.com",
           "client_type": 3
         }

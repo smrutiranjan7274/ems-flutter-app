@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../home/home_screen.dart';
+// import '../home/home_screen.dart';
+import '../login_signup/login_signup.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class OnBoardingScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const HomeScreen(),
+                  builder: (_) => const LoginView(),
                 ),
               );
             },

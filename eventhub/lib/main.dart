@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import 'screens/login_signup/login_signup.dart';
 import 'screens/onboarding/onboarding_screen.dart';
 
 int? initScreen;
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       initialRoute:
           initScreen == 0 || initScreen == null ? 'onboard' : 'signup',
       routes: {
-        'signup': (context) => const OnBoardingScreen(),
+        'signup': (context) => const LoginView(),
         'onboard': (context) => const OnBoardingScreen(),
       },
     );
