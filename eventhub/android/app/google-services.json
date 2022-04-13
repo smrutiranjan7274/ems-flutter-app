@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069632493239",
+    "firebase_url": "https://eventhub-e7fb5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "eventhub-e7fb5",
+    "storage_bucket": "eventhub-e7fb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069632493239:android:1b8bb510bf3e994f789f32",
+        "android_client_info": {
+          "package_name": "com.ems.eventhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069632493239-dua9ln0oij1onlcfrk5sjr00t0bpa3af.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDej2sEhLQBqAuJwSh-E7B5Mmgj3qruqcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069632493239-dua9ln0oij1onlcfrk5sjr00t0bpa3af.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
