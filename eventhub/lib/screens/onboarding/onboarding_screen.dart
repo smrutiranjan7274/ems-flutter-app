@@ -1,8 +1,6 @@
+import 'package:eventhub/screens/login_signup/login_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-
-// import '../home/home_screen.dart';
-import '../login_signup/login_signup.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -38,6 +36,7 @@ class OnBoardingScreen extends StatelessWidget {
         bodyTextStyle: const TextStyle(fontSize: 20),
         bodyPadding: const EdgeInsets.all(16).copyWith(bottom: 0),
         imagePadding: const EdgeInsets.all(24).copyWith(top: 50),
+        pageColor: Colors.white,
       );
 
   @override
@@ -54,14 +53,10 @@ class OnBoardingScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             showSkipButton: true,
-            // showBackButton: true,
-            // back: const Text('Back'),
             onDone: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const LoginView(),
-                ),
+                MaterialPageRoute(builder: (_) => const LoginView()),
               );
             },
             pages: getPages(),

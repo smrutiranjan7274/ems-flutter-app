@@ -1,11 +1,10 @@
 // import 'package:flutter/cupertino.dart';
 // ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
 
+import 'package:eventhub/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../utils/app_color.dart';
 
 Widget community1st({title, path, style}) {
   return Row(
@@ -376,6 +375,7 @@ Widget socialAppsIcons({text, Function? onPressed}) {
 
 Widget textField(
     {text,
+    prefixIcon,
     TextEditingController? controller,
     Function? validator,
     TextInputType inputType = TextInputType.text}) {
@@ -388,6 +388,7 @@ Widget textField(
       validator: (input) => validator!(input),
       decoration: InputDecoration(
           hintText: text,
+          prefixIcon: prefixIcon,
           errorStyle: const TextStyle(fontSize: 0),
           contentPadding: const EdgeInsets.only(
             bottom: 44 / 2,

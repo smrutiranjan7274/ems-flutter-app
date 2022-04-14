@@ -40,13 +40,15 @@ dependencies:
   get:
   image_picker:
   flutter_svg:
+  flutter_secure_storage: ^5.0.2
+  google_nav_bar: ^5.0.6
 
   # Firebase Plugins
-  firebase_core:
-  firebase_auth:
-  firebase_storage:
-  cloud_firestore:
-  google_sign_in:
+  firebase_core: ^1.14.1
+  firebase_auth: ^3.3.14
+  firebase_storage: ^10.2.12
+  cloud_firestore: ^3.1.12
+  google_sign_in: ^5.3.0
 
 dev_dependencies:
   flutter_test:

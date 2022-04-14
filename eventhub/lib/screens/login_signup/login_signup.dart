@@ -1,11 +1,10 @@
 import 'package:eventhub/controller/auth_controller.dart';
+import 'package:eventhub/screens/profile/create_profile_screen.dart';
+import 'package:eventhub/utils/app_color.dart';
+import 'package:eventhub/widgets/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../utils/app_color.dart';
-import '../../widgets/my_widgets.dart';
-import '../profile/create_profile_screen.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -274,7 +273,6 @@ class _LoginViewState extends State<LoginView> {
                         if (!formKey.currentState!.validate()) {
                           return;
                         }
-
                         _authController.signin(
                             email: emailController.text.trim(),
                             password: passwordController.text.trim());

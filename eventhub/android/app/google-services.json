@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "1069632493239-0fqcrmbiu8mkipj5n2a7342lovnqsk0m.apps.googleusercontent.com",
+          "client_id": "1069632493239-hsqjj9l5sd9uj7eov7kgdfcpk086vik1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ems.eventhub",
-            "certificate_hash": "851ec7ddfdaaed4bbdee7c233a28f25297c39c1f"
+            "certificate_hash": "f5fab62ed87c36ba49ec93e047ec0bd0bba9c292"
+          }
+        },
+        {
+          "client_id": "1069632493239-vphhoug9sf9kmo2i82klhhh56trg5d13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ems.eventhub",
+            "certificate_hash": "8c495372fb6b11aab5cd553e65ed2c3520e5ebad"
           }
         },
         {
