@@ -1,6 +1,8 @@
-import 'package:eventhub/screens/login_signup/login_signup.dart';
+// import 'package:easevent/main.dart';
+import 'package:easevent/screens/login_signup/login_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -53,7 +55,10 @@ class OnBoardingScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             showSkipButton: true,
-            onDone: () {
+            onDone: () async {
+              SharedPreferences preferences =
+                  await SharedPreferences.getInstance();
+              await preferences.setInt('initScreen', 1);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => const LoginView()),

@@ -1,11 +1,16 @@
 import 'dart:io';
 
-import 'package:eventhub/controller/auth_controller.dart';
-import 'package:eventhub/utils/app_color.dart';
-import 'package:eventhub/widgets/my_widgets.dart';
+import 'package:easevent/controller/auth_controller.dart';
+import 'package:easevent/utils/app_color.dart';
+import 'package:easevent/widgets/my_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:path/path.dart' as _path;
+import 'package:path_provider/path_provider.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({Key? key}) : super(key: key);
@@ -21,72 +26,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController dob = TextEditingController();
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      initialDatePickerMode: DatePickerMode.day,
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null) {
-      dob.text = '${picked.day}-${picked.month}-${picked.year}';
-    }
-  }
-
-  imagePickDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Choose Image Source'),
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  final XFile? image =
-                      await _picker.pickImage(source: ImageSource.camera);
-                  if (image != null) {
-                    profileImage = File(image.path);
-                    setState(() {});
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Icon(
-                  Icons.camera_alt,
-                  size: 30,
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              InkWell(
-                onTap: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  final XFile? image = await _picker.pickImage(
-                    source: ImageSource.gallery,
-                  );
-                  if (image != null) {
-                    profileImage = File(image.path);
-                    setState(() {});
-                    Navigator.pop(context);
-                  }
-                },
-                child: Image.asset(
-                  'assets/gallary.png',
-                  width: 25,
-                  height: 25,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   File? profileImage;
 
@@ -355,5 +294,97 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      initialDatePickerMode: DatePickerMode.day,
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      dob.text = '${picked.day}-${picked.month}-${picked.year}';
+    }
+  }
+
+  imagePickDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Choose Image Source'),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                onTap: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final XFile? pickedImage = await _picker.pickImage(
+                    source: ImageSource.camera,
+                    imageQuality: 50,
+                  );
+                  if (pickedImage != null) {
+                    var file = await ImageCropper().cropImage(
+                      sourcePath: pickedImage.path,
+                      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+                    );
+                    if (file == null) {
+                      return;
+                    }
+                    profileImage = await compressImage(file.path, 50);
+                    setState(() {});
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Icon(
+                  Icons.camera_alt,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              InkWell(
+                onTap: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final XFile? pickedImage = await _picker.pickImage(
+                      source: ImageSource.gallery, imageQuality: 50);
+                  if (pickedImage != null) {
+                    var file = await ImageCropper().cropImage(
+                      sourcePath: pickedImage.path,
+                      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+                    );
+                    if (file == null) {
+                      return;
+                    }
+                    profileImage = await compressImage(file.path, 50);
+                    setState(() {});
+                    Navigator.pop(context);
+                  }
+                },
+                child: Image.asset(
+                  'assets/gallary.png',
+                  width: 25,
+                  height: 25,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<File> compressImage(String path, int quality) async {
+    final newPath = _path.join((await getTemporaryDirectory()).path,
+        '${DateTime.now()}. ${_path.extension(path)}');
+    final result = await FlutterImageCompress.compressAndGetFile(
+      path,
+      newPath,
+      quality: quality,
+    );
+    return result!;
   }
 }

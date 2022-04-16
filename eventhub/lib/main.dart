@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
-import 'package:eventhub/controller/auth_controller.dart';
-import 'package:eventhub/screens/home/home_screen.dart';
+import 'package:easevent/controller/auth_controller.dart';
+import 'package:easevent/screens/home/home_screen.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,6 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SharedPreferences preferences = await SharedPreferences.getInstance();
   initScreen = preferences.getInt('initScreen');
-  await preferences.setInt('initScreen', 1);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
@@ -44,9 +44,10 @@ class _MyAppState extends State<MyApp> {
     checkLogin();
   }
 
-  void checkLogin() async {
+  Future<void> checkLogin() async {
     String? token = await _authController.getToken();
-    if (token != null) {
+    String? uid = await _authController.getUid();
+    if (token != null || uid != null) {
       setState(() {
         currentPage = HomeScreen();
       });
@@ -57,16 +58,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Easevent',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      initialRoute:
-          initScreen == 0 || initScreen == null ? 'onboard' : 'signup',
+      initialRoute: initScreen == 0 || initScreen == null ? 'onboard' : 'home',
       routes: {
-        'signup': (context) => currentPage,
+        'home': (context) => currentPage,
         'onboard': (context) => OnBoardingScreen(),
       },
     );

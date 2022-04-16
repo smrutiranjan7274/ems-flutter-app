@@ -1,7 +1,7 @@
-import 'package:eventhub/controller/auth_controller.dart';
-import 'package:eventhub/screens/profile/create_profile_screen.dart';
-import 'package:eventhub/utils/app_color.dart';
-import 'package:eventhub/widgets/my_widgets.dart';
+import 'package:easevent/controller/auth_controller.dart';
+// import 'package:easevent/screens/profile/create_profile_screen.dart';
+import 'package:easevent/utils/app_color.dart';
+import 'package:easevent/widgets/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,8 +52,9 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 SizedBox(height: Get.height * 0.1),
                 Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    padding: const EdgeInsets.only(left: 69, right: 69),
                     child: Image.asset('assets/logo/name_logo.png')),
+                SizedBox(height: Get.height * 0.025),
                 isSignUp
                     ? Text(
                         'Sign Up',
@@ -300,7 +301,7 @@ class _LoginViewState extends State<LoginView> {
               socialAppsIcons(
                   text: 'assets/fb.png',
                   onPressed: () {
-                    Get.to(() => const CreateProfileScreen());
+                    // Get.to(() => const CreateProfileScreen());
                   }),
               socialAppsIcons(
                   text: 'assets/google.png',
@@ -402,7 +403,6 @@ class _LoginViewState extends State<LoginView> {
                       if (!formKey.currentState!.validate()) {
                         return;
                       }
-
                       _authController.signup(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim());

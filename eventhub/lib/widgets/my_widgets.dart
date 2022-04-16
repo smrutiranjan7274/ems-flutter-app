@@ -1,12 +1,12 @@
 // import 'package:flutter/cupertino.dart';
 // ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
 
-import 'package:eventhub/utils/app_color.dart';
+import 'package:easevent/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-Widget community1st({title, path, style}) {
+Widget communitylst({title, path, style}) {
   return Row(
     children: [
       path.toString().isEmpty
@@ -21,12 +21,12 @@ Widget community1st({title, path, style}) {
               ),
             )
           : Container(
-              width: 24,
-              height: 24,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(path), fit: BoxFit.fill)),
+                shape: BoxShape.circle,
+                image: DecorationImage(image: NetworkImage(path)),
+              ),
             ),
       const SizedBox(
         width: 10,
@@ -54,7 +54,7 @@ Widget completeCommunityWidget({
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                community1st(
+                communitylst(
                   path: imagePath,
                   title: imageTitle,
                   style: const TextStyle(
@@ -94,7 +94,7 @@ Widget completeCommunityWidget({
                     fit: BoxFit.cover,
                   ),
                 ),
-                community1st(
+                communitylst(
                   path: imagePath2,
                   title: imageTitle2,
                   style: const TextStyle(

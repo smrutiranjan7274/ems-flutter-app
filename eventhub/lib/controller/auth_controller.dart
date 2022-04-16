@@ -3,9 +3,9 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eventhub/screens/home/home_screen.dart';
-import 'package:eventhub/screens/login_signup/login_signup.dart';
-import 'package:eventhub/screens/profile/create_profile_screen.dart';
+import 'package:easevent/screens/home/home_screen.dart';
+import 'package:easevent/screens/login_signup/login_signup.dart';
+import 'package:easevent/screens/profile/create_profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +23,16 @@ class AuthController extends GetxController {
 
   BuildContext get context => Get.context!;
 
+  get onAuthStateChanged => null;
+
   void signin({String? email, String? password}) {
     isLoading(true);
     auth
         .signInWithEmailAndPassword(email: email!, password: password!)
         .then((value) {
-      // Login Succes
+      // Login Success
       isLoading(false);
+      storeTokenAndData(value);
       Get.offAll(() => const HomeScreen());
       // Navigator.of(context).push(
       //   MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -60,6 +63,7 @@ class AuthController extends GetxController {
         .then((value) {
       // On Success Navigate user to profile screen
       isLoading(false);
+      storeTokenAndData(value);
       Get.offAll(() => const CreateProfileScreen());
 
       // Navigator.of(context).push(
@@ -129,12 +133,17 @@ class AuthController extends GetxController {
     String uid = FirebaseAuth.instance.currentUser!.uid;
     isProfileInformationLoading(true);
 
+    User user = auth.currentUser!;
+    user.updateDisplayName(firstName + ' ' + lastName);
+    user.updatePhotoURL(imageUrl);
+
     FirebaseFirestore.instance.collection('users').doc(uid).set({
       'image': imageUrl,
       'first': firstName,
       'last': lastName,
       'dob': dob,
-      'gender': gender
+      'gender': gender,
+      'phoneNumber': mobileNumber,
     }).then((value) {
       isProfileInformationLoading(false);
       Get.offAll(() => HomeScreen());
@@ -151,23 +160,33 @@ class AuthController extends GetxController {
           MaterialPageRoute(builder: (context) => const LoginView()),
           (route) => false);
       await storage.delete(key: "token");
+      await storage.delete(key: "uid");
     } catch (e) {
       print("Error: $e");
     }
   }
 
+  // Works for Google SignIn/SignUp only!
   Future<void> storeTokenAndData(UserCredential userCredential) async {
     await storage.write(
       key: "token",
       value: userCredential.credential?.token.toString(),
     );
+    // await storage.write(
+    //   key: "userCredential",
+    //   value: userCredential.toString(),
+    // );
     await storage.write(
-      key: "userCredential",
-      value: userCredential.toString(),
+      key: "uid",
+      value: userCredential.user?.uid.toString(),
     );
   }
 
   Future<String?> getToken() async {
     return await storage.read(key: "token");
+  }
+
+  Future<String?> getUid() async {
+    return await storage.read(key: "uid");
   }
 }
