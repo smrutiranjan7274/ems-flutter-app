@@ -1,4 +1,4 @@
-# eventhub
+# easevent
 
 A new Flutter project.
 
