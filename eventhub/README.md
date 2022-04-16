@@ -1,6 +1,6 @@
 # easevent
 
-A new Flutter project.
+An event management flutter application.
 
 ## Getting Started
 
