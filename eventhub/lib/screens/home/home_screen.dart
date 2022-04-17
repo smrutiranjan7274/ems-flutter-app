@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:easevent/screens/pages/events.dart';
-import 'package:easevent/screens/pages/home.dart';
-import 'package:easevent/screens/pages/search.dart';
+import 'package:easevent/screens/pages/explore.dart';
 import 'package:easevent/screens/pages/settings.dart';
 // import 'package:easevent/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _pages = [
     const UserHome(),
     const UserEvents(),
-    const Search(),
     const UserSettings(),
   ];
 
@@ -36,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         color: const Color(0xff3D56F0),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(8),
           child: GNav(
             backgroundColor: const Color(0xff3D56F0),
             color: Colors.white,
@@ -61,12 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icons.calendar_month_outlined,
                 iconSize: 32,
                 text: 'Events',
-                iconActiveColor: Color(0xff39D1F2),
-              ),
-              GButton(
-                icon: Icons.search,
-                text: 'Search',
-                iconSize: 32,
                 iconActiveColor: Color(0xff39D1F2),
               ),
               GButton(

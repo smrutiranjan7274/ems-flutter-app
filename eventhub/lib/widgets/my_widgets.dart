@@ -137,6 +137,35 @@ Widget elevatedButton({text, Function? onpress}) {
   );
 }
 
+Widget elevatedButtonIcon({text, Function? onpress, icon}) {
+  return ElevatedButton.icon(
+    icon: icon,
+    onPressed: () {
+      onpress!();
+    },
+    label: Text(
+      text,
+    ),
+  );
+}
+
+Widget buttonIcon({text, Function? onpress, icon}) {
+  return ElevatedButton(
+    child: Wrap(
+      children: <Widget>[
+        icon,
+      ],
+    ),
+    onPressed: () {
+      onpress!();
+    },
+    style: ElevatedButton.styleFrom(
+      primary: Colors.transparent,
+      shadowColor: Colors.transparent,
+    ),
+  );
+}
+
 Widget iconTitleContainer(
     {text,
     path,
