@@ -6,6 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
+}
+
 Widget communitylst({title, path, style}) {
   return Row(
     children: [
@@ -265,20 +273,27 @@ Widget iconWithTitle({text, Function? func, bool? isShow = true}) {
   );
 }
 
-Widget labelTextField({label, hintText}) {
+Widget labelTextField({controller, label, hintText, prefixicon, suffixicon}) {
   return Container(
     margin: const EdgeInsets.only(top: 20),
     height: 48,
     child: TextFormField(
+      controller: controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(
-          bottom: 44 / 2,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
+        prefixIcon: prefixicon,
+        suffix: suffixicon,
+        // suffixText: 'Clear',
+        contentPadding: const EdgeInsets.only(bottom: 48 / 2),
         labelText: label,
         hintText: hintText,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24.0),
+          borderSide: BorderSide(color: AppColors.blue, width: 2),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24.0),
+          borderSide: BorderSide(color: AppColors.blue, width: 2),
+        ),
       ),
     ),
   );
@@ -396,6 +411,40 @@ Widget socialAppsIcons({text, Function? onPressed}) {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(text),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget textCardField(
+    {text,
+    prefixIcon,
+    TextEditingController? controller,
+    Function? validator,
+    height,
+    maxLength,
+    maxLines,
+    TextInputType inputType = TextInputType.text}) {
+  return Expanded(
+    child: Card(
+      elevation: 0,
+      color: Colors.white30,
+      // height: 44,
+      // margin: EdgeInsets.only(bottom: Get.height * 0.02),
+      child: TextFormField(
+        maxLength: maxLength,
+        maxLines: maxLines,
+        keyboardType: inputType,
+        controller: controller,
+        validator: (input) => validator!(input),
+        decoration: InputDecoration(
+          hintText: text,
+          prefixIcon: prefixIcon,
+          errorStyle: const TextStyle(fontSize: 0),
+          contentPadding:
+              const EdgeInsets.only(bottom: 44 / 2, left: 10, right: 10),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
         ),
       ),
     ),

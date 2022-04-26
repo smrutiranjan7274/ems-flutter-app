@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, avoid_print, unused_import
 
 import 'package:easevent/controller/auth_controller.dart';
 import 'package:easevent/screens/home/home_screen.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easevent/screens/login_signup/login_signup.dart';
+import 'package:easevent/screens/onboarding/onboarding_screen.dart';
+import 'package:easevent/screens/profile/create_profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,9 +12,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-import 'screens/login_signup/login_signup.dart';
-import 'screens/onboarding/onboarding_screen.dart';
 
 int? initScreen;
 
@@ -25,7 +24,6 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
-  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatefulWidget {
@@ -52,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         currentPage = HomeScreen();
       });
     }
+    FlutterNativeSplash.remove();
   }
 
   // This widget is the root of your application.
