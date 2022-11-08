@@ -49,7 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
         home: Scaffold(
           body: IntroductionScreen(
             baseBtnStyle:
-                TextButton.styleFrom(primary: const Color(0xff3D56F0)),
+                TextButton.styleFrom(foregroundColor: const Color(0xff3D56F0)),
             done: const Text(
               'Get Started',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -81,7 +81,8 @@ class OnBoardingScreen extends StatelessWidget {
               color: Colors.black26,
               spacing: const EdgeInsets.symmetric(horizontal: 3.0),
               activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0)),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
             ),
           ),
         ),

@@ -52,6 +52,15 @@ dependencies:
   firebase_storage: ^10.2.12
   cloud_firestore: ^3.1.12
   google_sign_in: ^5.3.0
+  flutter_displaymode: ^0.4.1
+
+  dotted_border:
+  video_thumbnail: ^0.5.0
+  flutter_stripe: ^3.1.0
+  emoji_picker_flutter: 1.0.8
+  firebase_messaging: ^11.2.5
+  # flutter_local_notifications: ^9.2.0
+  timeago:
 
 dev_dependencies:
   flutter_test:

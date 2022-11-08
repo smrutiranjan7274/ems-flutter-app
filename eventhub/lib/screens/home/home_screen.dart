@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_print
 
+import 'package:easevent/controller/data_controller.dart';
 import 'package:easevent/screens/pages/events.dart';
 import 'package:easevent/screens/pages/explore.dart';
 import 'package:easevent/screens/pages/settings.dart';
-// import 'package:easevent/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,12 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    Get.put(
+      DataController(),
+      permanent: true,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('EventHub'),
-      //   backgroundColor: AppColors.blue,
-      // ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         color: const Color(0xff3D56F0),
@@ -42,9 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
             tabBackgroundColor: Colors.black.withAlpha(50),
             gap: 8,
             onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+              setState(
+                () {
+                  _selectedIndex = index;
+                },
+              );
               // print(index);
             },
             padding: const EdgeInsets.all(12),

@@ -23,9 +23,11 @@ class _LoginViewState extends State<LoginView> {
   int selectedRadio = 0;
 
   void setSelectedRadio(int val) {
-    setState(() {
-      selectedRadio = val;
-    });
+    setState(
+      () {
+        selectedRadio = val;
+      },
+    );
   }
 
   bool isSignUp = false;
@@ -309,7 +311,7 @@ class _LoginViewState extends State<LoginView> {
                     _authController.signInWithGoogle();
                   }),
             ],
-          )
+          ),
         ],
       ),
     );

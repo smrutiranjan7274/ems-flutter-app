@@ -122,7 +122,7 @@ class AuthController extends GetxController {
     await taskSnapshot.ref.getDownloadURL().then((value) {
       imageUrl = value;
     }).catchError((e) {
-      print("Error happen $e");
+      print("Error: $e");
     });
 
     return imageUrl;
@@ -172,10 +172,6 @@ class AuthController extends GetxController {
       key: "token",
       value: userCredential.credential?.token.toString(),
     );
-    // await storage.write(
-    //   key: "userCredential",
-    //   value: userCredential.toString(),
-    // );
     await storage.write(
       key: "uid",
       value: userCredential.user?.uid.toString(),

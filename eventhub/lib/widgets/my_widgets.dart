@@ -168,7 +168,7 @@ Widget buttonIcon({text, Function? onpress, icon}) {
       onpress!();
     },
     style: ElevatedButton.styleFrom(
-      primary: Colors.transparent,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
     ),
   );
@@ -176,7 +176,7 @@ Widget buttonIcon({text, Function? onpress, icon}) {
 
 Widget iconTitleContainer(
     {text,
-    path,
+    icon,
     Function? onPress,
     bool isReadOnly = false,
     TextInputType type = TextInputType.text,
@@ -185,13 +185,10 @@ Widget iconTitleContainer(
     double width = 150,
     double height = 40}) {
   return Container(
-    // padding: EdgeInsets.only(left: 10),
-    decoration: const BoxDecoration(
-        // borderRadius: BorderRadius.circular(8),
-        // border: Border.all(width: 0.1, color: AppColors.genderTextColor),
-        ),
+    decoration: const BoxDecoration(),
     width: width,
     height: height,
+    alignment: Alignment.centerLeft,
     child: TextFormField(
       validator: (String? input) => validator!(input!),
       controller: controller,
@@ -202,11 +199,8 @@ Widget iconTitleContainer(
       },
       decoration: InputDecoration(
         errorStyle: const TextStyle(fontSize: 0),
-        contentPadding: const EdgeInsets.only(top: 3),
-        prefixIcon: Image.asset(
-          path,
-          cacheHeight: 18,
-        ),
+        contentPadding: const EdgeInsets.only(top: 4),
+        prefixIcon: icon,
         hintText: text,
         hintStyle: TextStyle(
           fontSize: 16,
@@ -259,7 +253,7 @@ Widget iconWithTitle({text, Function? func, bool? isShow = true}) {
           child: myText(
             text: text,
             style: const TextStyle(
-              fontSize: 23,
+              fontSize: 24,
               fontWeight: FontWeight.w600,
             ),
           ),
